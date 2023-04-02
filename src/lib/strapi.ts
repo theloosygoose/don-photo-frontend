@@ -23,7 +23,8 @@ export const strapiLogin = async ( username:string, password:string) => {
 
 export const strapiVerify = async (strapiToken:string) => {
 
-    let strapiUserId = jwt_decode(strapiToken).id;
+    let strapiDecoded:any = jwt_decode(strapiToken);
+    let strapiUserId = strapiDecoded.id;
     console.log(strapiUserId);
 
     const headers = new Headers();
@@ -40,7 +41,6 @@ export const strapiVerify = async (strapiToken:string) => {
 }
 
 export const strapiGetAllAlbums = async(strapiToken:string) => {
-    
 
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
@@ -56,13 +56,13 @@ export const strapiGetAllAlbums = async(strapiToken:string) => {
 
 }
 
-export const strapiGetSingleAlbum = async (strapiToken:string, slug:string) => {
+export const strapiGetSingleAlbum = async (strapiToken:string, handle:string) => {
 
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     headers.append('Authorization', `Bearer ${strapiToken}`)
 
-    const strapi_response = await fetch(`${url}/albums?filters[handle][$eq]=${slug}&populate=*`,{
+    const strapi_response = await fetch(`${url}/albums?filters[handle][$eq]=${handle}&populate=*`,{
         method:'GET',
         headers: headers,
     });

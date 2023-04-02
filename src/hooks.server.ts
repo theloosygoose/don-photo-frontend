@@ -1,4 +1,4 @@
-import { Handle, redirect } from '@sveltejs/kit';
+import type { Handle, redirect } from '@sveltejs/kit';
 import { strapiVerify } from '$lib/strapi';
 
 export const handle: Handle = async ({event, resolve}) => {

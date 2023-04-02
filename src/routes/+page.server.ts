@@ -1,6 +1,8 @@
-import { handle, redirect } from '@sveltejs/kit'
-import type { PageServerLoad } from './$types'
+import { redirect } from '@sveltejs/kit'
 import { strapiGetAllAlbums } from '$lib/strapi';
+
+import type { PageServerLoad } from './$types'
+import type {AlbumThumbnails, strapiAPIin} from '$lib/types';
 
 export const load: PageServerLoad = async ({ event, locals }) => {
     if (!locals.user){
@@ -10,35 +12,19 @@ export const load: PageServerLoad = async ({ event, locals }) => {
     let res_allAlbums = await strapiGetAllAlbums(locals.user.token);
     let album_data= await res_allAlbums.json()
 
-    let album_names = album_data.data.map((i) => {
-       return {
-        id: i.id,
-        title: i.attributes.title,
-        slug: i.attributes.handle
-       } 
-
-    })
-
-    let album_photos = album_data.data.map((i)=> {
+    let album_thumbnails = album_data.data.map(( i:strapiAPIin ) :AlbumThumbnails => {
         return {
-            album_id: i.id,
-            album_slug:i.attributes.handle,
-            album_title: i.attributes.title,
-            photos: i?.attributes?.photos?.data?.map((z) => {
-                return{
-                    url: z?.attributes?.url,
-                    caption: z?.attributes?.caption,
-                }
-            })
+            id: i.id,
+            handle: i.attributes.handle,
+            title: i.attributes.Title,
+            year: i.attributes.Year,
+            album_cover_thumbnail: i.attributes.Photos.data[0].attributes.formats.thumbnail.url,
+            album_cover_small: i.attributes.Photos.data[0].attributes.formats.small.url,
         }
     })
-    
-
 
 
     return {
-        album_names,
-        album_data,
-        album_photos
+        album_thumbnails
     };
 }
