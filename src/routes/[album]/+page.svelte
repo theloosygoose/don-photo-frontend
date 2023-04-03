@@ -1,25 +1,23 @@
 <script lang="ts">
     import FullscreenView from '$lib/FullScreenView/FullscreenView.svelte';
-	import { currentIndex } from '$lib/stores';
+	import { currentIndex, fullScreenState } from '$lib/stores';
     import type { SingleAlbum } from '$lib/types';
 
     export let data;
     let albumData:SingleAlbum = data.singleAlbumData[0];
 
-    $: console.log($currentIndex)
 
-    let fullScreen = false;
-    function toggleFullscreen(){
-        fullScreen = true
+    function openFullscreen(){
+        fullScreenState.set(true);
     }
 </script>
 
 
-{#if fullScreen}
+{#if $fullScreenState}
     <FullscreenView {albumData}/>
 {/if}
 
-{#if !fullScreen}
+{#if !$fullScreenState}
     <main>
         <h1>{albumData.title}</h1>
         <h2>{albumData.year}</h2>
@@ -30,7 +28,7 @@
                 <!-- svelte-ignore a11y-click-events-have-key-events -->
                 <div>
                     <!-- svelte-ignore a11y-click-events-have-key-events -->
-                    <img data-photo-id="{photo.photo_index}" on:click={toggleFullscreen} on:pointerover={( i ) => currentIndex.set(parseInt(i.target.dataset.photoId))} src="{photo.photo_medium.url}" alt="">
+                    <img data-photo-id="{photo.photo_index}" on:click={openFullscreen} on:pointerover={( i ) => currentIndex.set(parseInt(i.target.dataset.photoId))} src="{photo.photo_medium.url}" alt="">
                 </div>
                 {/each}
             </div>

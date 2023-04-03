@@ -1,6 +1,6 @@
 <script lang="ts">
     import type { SingleAlbum } from "$lib/types";
-    import { currentIndex } from "$lib/stores";
+    import { currentIndex, fullScreenState } from "$lib/stores";
 	import Previous from "./Previous.svelte";
     import Next from "./Next.svelte";
 
@@ -10,10 +10,16 @@
 
     $:photo_url = albumData.photos[$currentIndex].photo_base.url;
 
+    function closeFullscreen(){
+        fullScreenState.set(false);
+    }
 </script>
 
 
 <main>
+    <div>
+        <button class="close" on:click={closeFullscreen} >Close</button>
+    </div>
     <div class="container">
         <img src="{photo_url}" alt="">
     </div>
@@ -26,6 +32,13 @@
 
 
 <style>
+    button.close{
+        position: fixed;
+        z-index: 90;
+        width: 100%;
+    }
+
+
     div.container{
         display: flex;
         justify-content: center;
