@@ -26,7 +26,7 @@
             <div class="gallery">
                 {#each albumData.photos as photo}
                 <!-- svelte-ignore a11y-click-events-have-key-events -->
-                <div>
+                <div class="photo-wrapper">
                     <!-- svelte-ignore a11y-click-events-have-key-events -->
                     <img data-photo-id="{photo.photo_index}" on:click={openFullscreen} on:pointerover={( i ) => currentIndex.set(parseInt(i.target.dataset.photoId))} src="{photo.photo_medium.url}" alt="">
                 </div>
@@ -37,6 +37,11 @@
 {/if}
 
 <style>
+    .photo-wrapper{
+        margin-bottom: 10px;
+
+    }
+
     .container {
         margin-left: 5%;
         margin-right: 5%;

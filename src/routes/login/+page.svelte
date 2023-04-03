@@ -31,7 +31,28 @@
 
 <style>
     form {
+        display: flex;
+        flex-direction: column;
         margin-top: 10%;
+    }
+
+    button{
+        font-size: 1.5rem;
+        justify-self: center;
+        align-self: center;
+        width: 50%;
+    }
+
+    label{
+        font-size: 1.5rem;
+        margin-bottom: 30px;
+    }
+
+    input{
+        height: 100%;
+        width: 50%;
+        border-radius: 10px;
+        border: none;
     }
 
     .warning{

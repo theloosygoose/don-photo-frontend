@@ -32,6 +32,9 @@
 
 
 <style>
+    main{
+        z-index: 50;
+    }
     button.close{
         top: 5;
         z-index: 100;
