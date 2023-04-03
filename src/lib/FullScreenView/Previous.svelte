@@ -9,8 +9,18 @@
 
 </script>
 
-<button on:click={decrement}>Previous</button>
+<button on:click={decrement}>Prev.</button>
 
 <style>
+    button{
+        height: 100%;
+        width: 20%;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    button:hover{
+        opacity: 0.2;
+    }
 
 </style>

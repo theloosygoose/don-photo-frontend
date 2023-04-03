@@ -6,6 +6,8 @@
     export let data;
     let albumData:SingleAlbum = data.singleAlbumData[0];
 
+    $: console.log($currentIndex)
+
     let fullScreen = false;
     function toggleFullscreen(){
         fullScreen = true
@@ -28,7 +30,7 @@
                 <!-- svelte-ignore a11y-click-events-have-key-events -->
                 <div>
                     <!-- svelte-ignore a11y-click-events-have-key-events -->
-                    <img data-photo-id="{photo.photo_index}" on:click={toggleFullscreen} on:pointerover={( i ) => currentIndex.set(i.target.dataset.photoId)} src="{photo.photo_medium.url}" alt="">
+                    <img data-photo-id="{photo.photo_index}" on:click={toggleFullscreen} on:pointerover={( i ) => currentIndex.set(parseInt(i.target.dataset.photoId))} src="{photo.photo_medium.url}" alt="">
                 </div>
                 {/each}
             </div>
