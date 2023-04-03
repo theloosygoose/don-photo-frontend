@@ -6,7 +6,7 @@
     console.log(album_thumbnails);
 </script>
 
-<h1>Homepage</h1>
+<h1>All Albums</h1>
 
 
 {#each album_thumbnails as album }
@@ -21,10 +21,9 @@
 
 
 <style>
-    a{
-        background-color: aquamarine;
-
+    h1{
+        font-size: 3rem;
+        margin-bottom: 10px;
     }
-
 </style>
 

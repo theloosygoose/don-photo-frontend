@@ -17,7 +17,7 @@
 
 
 <main>
-    <div>
+    <div class="closewrap">
         <button class="close" on:click={closeFullscreen} >Close</button>
     </div>
     <div class="container">
@@ -33,9 +33,24 @@
 
 <style>
     button.close{
-        position: fixed;
-        z-index: 90;
+        top: 5;
+        z-index: 100;
         width: 100%;
+        height:100%;
+        cursor: pointer;
+    }
+
+    div.closewrap{
+        z-index: 100;
+        position: fixed;
+        opacity: 0;
+        cursor: pointer;
+        height: 20vh;
+        width: 100%;
+    }
+
+    div.closewrap:hover{
+        opacity: 0.2;
     }
 
 
@@ -44,6 +59,7 @@
         justify-content: center;
         align-items: center;
         height: 100vh;
+        z-index: -1;
     }
 
     div.controls{
@@ -55,12 +71,10 @@
         top: 10px;
         height: 100%;
         width: 100%;
-        z-index: 100;
+        z-index: 1;
 
     }
-
     img{
-        z-index: 0;
         margin: 0;
         max-height: 100vh;
         max-width: 100vw;
