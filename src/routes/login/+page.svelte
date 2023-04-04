@@ -1,7 +1,14 @@
 
 <script lang="ts">
+    import { URL } from '$lib/strapi';
+	import { onMount } from 'svelte';
     import type { ActionData } from './$types';
     export let form: ActionData;
+
+    onMount(() => {
+        let PING_SERVER_COLDSTART = fetch(URL);
+        console.log(PING_SERVER_COLDSTART);
+    });
 
 </script>
 

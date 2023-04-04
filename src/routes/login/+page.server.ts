@@ -24,7 +24,6 @@ const login: Action = async ({ cookies, request }) => {
         return fail(400, {credentials: true})
     } 
 
-
     cookies.set('session', login?.jwt, {
         //send cookies to every page
         path: '/',
@@ -34,11 +33,10 @@ const login: Action = async ({ cookies, request }) => {
         // only requests from the same site can send cookies
         sameSite: 'strict',
         // set cookies to expire after a month
-        maxAge: 60,
+        maxAge: 60 * 60 * 2,
 
     })
 
-    console.log("User Logged In");
     throw redirect(302, '/');
 }
 

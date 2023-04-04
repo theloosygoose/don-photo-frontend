@@ -1,6 +1,6 @@
 import jwt_decode from 'jwt-decode';
 
-let url = `https://strapi-backend-neue.onrender.com/api`
+export const URL = `https://strapi-backend-neue.onrender.com/api`;
 
 export const strapiLogin = async ( username:string, password:string) => {
     const headers = new Headers();
@@ -12,7 +12,7 @@ export const strapiLogin = async ( username:string, password:string) => {
         password: password
     }
 
-    const strapi_response = await fetch(`${url}/auth/local`, {
+    const strapi_response = await fetch(`${URL}/auth/local`, {
         method: 'POST',
         headers: headers,
         body: JSON.stringify(body)
@@ -32,7 +32,7 @@ export const strapiVerify = async (strapiToken:string) => {
     headers.append('Authorization', `Bearer ${strapiToken}`)
 
 
-    const strapi_response = await fetch(`${url}/users?filters[id][$eq]=${strapiUserId}`,{
+    const strapi_response = await fetch(`${URL}/users?filters[id][$eq]=${strapiUserId}`,{
         method:'GET',
         headers: headers,
     });
@@ -47,7 +47,7 @@ export const strapiGetAllAlbums = async(strapiToken:string) => {
     headers.append('Authorization', `Bearer ${strapiToken}`)
 
 
-    const strapi_response = await fetch(`${url}/albums?populate=*`,{
+    const strapi_response = await fetch(`${URL}/albums?populate=*`,{
         method:'GET',
         headers: headers,
     });
@@ -62,7 +62,7 @@ export const strapiGetSingleAlbum = async (strapiToken:string, handle:string) =>
     headers.append('Content-Type', 'application/json');
     headers.append('Authorization', `Bearer ${strapiToken}`)
 
-    const strapi_response = await fetch(`${url}/albums?filters[handle][$eq]=${handle}&populate=*`,{
+    const strapi_response = await fetch(`${URL}/albums?filters[handle][$eq]=${handle}&populate=*`,{
         method:'GET',
         headers: headers,
     });
