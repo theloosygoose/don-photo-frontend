@@ -1,4 +1,3 @@
-
 <script lang="ts">
     import { URL } from '$lib/strapi';
 	import { onMount } from 'svelte';
